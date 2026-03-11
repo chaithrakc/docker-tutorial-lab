@@ -47,4 +47,4 @@ def predict_note_authentication_file():
     return f"Predicted values: {', '.join(['Fake Note' if pred == 0 else 'Genuine Note' for pred in predictions])}"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
