@@ -7,6 +7,7 @@ Created on: 2024-06-01
 
 from flask import Flask, request
 import pickle
+import pandas as pd
 import logging
 
 # set up logging
@@ -24,7 +25,7 @@ def home_page():
     return "Welcome to the Bank Note Authentication API! Use the /predict endpoint to classify bank notes."
 
 @app.route('/predict', methods=['GET'])
-def predict():
+def predict_note_authentication():
     variance = request.args.get('variance')
     skewness = request.args.get('skewness')
     curtosis = request.args.get('curtosis')
@@ -39,6 +40,11 @@ def predict():
     else:
         return "The bank note is classified as: Genuine Note"
 
+@app.route('/predict_file', methods=['POST'])
+def predict_note_authentication_file():
+    val_df = pd.read_csv(request.files.get("file"))
+    predictions = bank_note_rf_classifier.predict(val_df)
+    return f"Predicted values: {', '.join(['Fake Note' if pred == 0 else 'Genuine Note' for pred in predictions])}"
 
 if __name__ == "__main__":
     app.run()
