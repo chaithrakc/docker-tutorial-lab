@@ -10,4 +10,4 @@ from . import create_app
 app = create_app()
 
 if __name__ == '__main__':
-    uvicorn.run(app, host=app.config['HOST'], port=app.config['PORT'])
+    uvicorn.run(app)
