@@ -7,21 +7,27 @@ Created on: 2026-03-12
 """
 
 import logging
-from flask import Flask
 from .config import Config
 from .routes import register_routes
+from fastapi import FastAPI
 
-def create_app(config: Config | None = None) -> Flask:
-    app = Flask(__name__)
+def create_app(config: Config | None = None) -> FastAPI:
+    
+    # Create FastAPI app instance
+    bank_note_app = FastAPI(
+        title="Bank Note Authentication API",
+        description="API for classifying bank notes as genuine or fake based on features like variance, skewness, curtosis, and entropy.",
+        version="1.0.0"
+    )
 
     # config
-    app.config.from_object(config or Config())
+    bank_note_app.state.config = config or Config()
 
     #logging
-    logging.basicConfig(level=app.config['LOG_LEVEL'])
-    logging.getLogger(__name__).info("App created with configuration: %s", app.config)
+    logging.basicConfig(level=bank_note_app.state.config.LOG_LEVEL)
+    logging.getLogger(__name__).info("App created with configuration: %s", bank_note_app.state.config)
 
     # routes / blueprints
-    register_routes(app)
+    register_routes(bank_note_app)
 
-    return app
+    return bank_note_app
