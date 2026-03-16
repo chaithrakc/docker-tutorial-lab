@@ -1,0 +1,11 @@
+---
+applications:
+  - name: bank-note-authentication-app
+    memory: 512M
+    instances: 1
+    docker:
+      image: chaithra22/ml-model-serving:latest
+      username: chaithra22
+    routes:
+      - route: ml-model-serving-api.apps-127-0-0-1.nip.io
+  
