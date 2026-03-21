@@ -7,6 +7,12 @@ on:
     branches: [ main ]
 
 jobs:
+    dockerbuild:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Build the docker image
+          run: docker build . -f Dockerfile -t workflow-test:$(date +%s)
+
     build-and-test:
         runs-on: ubuntu-latest
 
