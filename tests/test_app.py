@@ -4,7 +4,7 @@ from app.config import Config
 import pytest
 
 @pytest.fixture
-def clinet():
+def client():
     test_config = Config()
     test_config.MODEL_PATH = "models/test_model.pkl"
     app = create_app(test_config)
