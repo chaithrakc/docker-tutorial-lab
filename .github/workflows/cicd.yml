@@ -10,6 +10,9 @@ jobs:
     dockerbuild:
         runs-on: ubuntu-latest
         steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+          
         - name: Build the docker image
           run: docker build . -f Dockerfile -t workflow-test:$(date +%s)
 
