@@ -6,7 +6,7 @@ import pytest
 @pytest.fixture
 def client():
     test_config = Config()
-    test_config.MODEL_PATH = "models/test_model.pkl"
+    test_config.MODEL_PATH = "models/bank_note_rf_model.pkl"
     app = create_app(test_config)
 
     with TestClient(app) as client:
